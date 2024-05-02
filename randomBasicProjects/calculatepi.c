@@ -1,24 +1,20 @@
-// IMPORTANT!!! This apparently doesn't work. I think it's best to rework it a
-// litte bit and do it iteratively... but that can be done later.
-
 #include <math.h>
 #include <stdio.h>
 
-// uses the Leibniz formula
-double calculatePiRecursive(double count) {
-  if (count == 1) {
-    return 4;
-  }
-  return 4 * pow(-1, count + 1) * (1.0 / (2 * count - 1)) +
-         calculatePiRecursive(count - 1);
-}
-
 int main(int argc, char *argv[]) {
-  // get user input
-  int count = *argv[1];
+  double result;
+  int denom = 1;
 
-  // call recursive function that many times
-  double result = calculatePiRecursive(count);
+  for (int i = 0; i < pow(10, 6); i++) {
+    if (i % 2 == 0) {
+      result += 4.0 / denom;
+    } else {
+      result -= 4.0 / denom;
+    };
+
+    denom += 2;
+  }
+
   printf("%f\n", result);
   return 0;
 }
