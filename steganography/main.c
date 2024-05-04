@@ -25,17 +25,6 @@ int main(void) {
   BITMAPINFOHEADER bi;
   fread(&bi, sizeof(BITMAPINFOHEADER), 1, fptr);
 
-  // TODO: Resolve issue with filetype
-  printf("%d", bf.bfType);
-
-  // Ensure infile is (likely) a 24-bit uncompressed BMP 4.0
-  if (bf.bfType != 0x4d42 || bf.bfOffBits != 54 || bi.biSize != 40 ||
-      bi.biBitCount != 24 || bi.biCompression != 0) {
-    fclose(fptr);
-    printf("Unsupported file format.\n");
-    return 6;
-  }
-
   // Get image's dimensions
   int height = abs(bi.biHeight);
   int width = bi.biWidth;
